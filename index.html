@@ -1,288 +1,174 @@
-<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>C4C PacMan</title>
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css"/>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-
-		<style>
-			html{
-				overflow-x: hidden;
-			}
-			.container {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-evenly;
-				align-items: center;
-				margin-top: 30px;
-				
-				
-			}
-			.code-container {
-				display: flex;
-				
-			}
-			.code-container > div {
-				padding: 20px;
-			}
-			/*@media screen and (max-width: 1270px) {
-			.container {
-				display: block;
-				}
-			
-			}*/
-			body {
-			background-color: rgb(70, 63, 63);
-			}
-            p{
-                color: whitesmoke;
-            }
-			#body {
-			height: 100px;
-			}
-			/*.column-left {
-			margin-top: 4%;
-			float: left;
-			margin-right: -3%;
-			width: 35.663%;
-			}
-			.column-right {
-			margin-top: 4%;
-			float: right;
-			width: 10.2%;
-			}
-			.column-center {
-			margin-top: 4%;
-			display: inline-block;
-			width: 50%;
-			min-width: 435px;
-			}*/
-			
-			#titlebox {
-			border: 1px solid black;
-			
-			
-			background-color: #c6c6c6;
-			margin-top: 10px;
-			padding: 10px;
-			}
-			#title {
-			color: white;
-			font-family: Arial, Helvetica, sans-serif;
-			text-align: center;
-			}
-			.multiplayer-menu {
-				width: 100%;
-				text-align: center;
-				margin-bottom: 30px;
-			}
-			.multiplayer-menu > div {
-				display: inline-block;
-				vertical-align: middle;
-			}
-		</style>
-	</head>
-	<body>
-		<nav id="titlebox">
-			<center><b style="color: #000;"> Pac-Man by Code 4 Community at Ohio State </b></center>
-		</nav>
-		<div class="container">
-			<div id="game">
-			</div>
-			<div class = "code-container">
-			<div class="column-center" id="code-editor">
-				<a style="color: fff;">
-					<p><b>Instructions:</b> Use the code editor below to tell the ghosts how to move.</p>
-				</a>
-			</div>
-			<div class="column-right">
-                <br>
-                <b style="text-align: center; color: whitesmoke"> Commands </b>
-                <p></p>
-				<p>
-                • moveUp
-                </p>
-				<p>
-                • moveLeft
-				</p>
-				<p>
-                • moveRight
-				</p>
-				<p>
-                • moveDown
-				</p>
-                <p>
-                      <br>
-
-				</p>
-				<p>
-					Update Speed:
-				</p>
-				<select style = "width: 100%" id = "loopSpeed">
-					<option value="50">Slow</option>
-					<option value="25">Medium</option>
-					<option value="10">Fast</option>
-					<option value="1">Instant</option>
-				</select> 
-				<p>
-				</p>
-				<button style="background-color: #a1a4a0;width: 100%;height: 30px;border-radius: 125%;" onclick="help()" type="button" class="btn btn-primary">Help</button>
-				<p>
-
-				</p>
-				<button style="background-color: #56ff1e;width: 100%;height: 30px;border-radius: 125%;" id="submit" type="button" class="btn btn-success">Submit</button>
-				<p>
-                      
-				</p>
-				<button style="background-color: #f42727;width: 100%;height: 30px;border-radius: 125%;" id="start-over" type="button" class="btn btn-primary">Start Over</button>
-                <p>
-
-				
-
-				
-                    <br>
-                    <br>
-                    <br>
-
-              </p>
-              
+   <head>
+      <meta charset="UTF-8">
+      <title>C4C PacMan</title>
+      <link rel="stylesheet" href="src/assets/css/style.css">
+   </head>
+   <body>
+      <nav id="titlebox">
+         <center>
+            <p style="margin: 0px;font-weight: 700;color: #000;"> Pac-Man by Code 4 Community at Ohio State 
+               <button onclick='localStorage.logged_in = false; window.location.reload();' style=" background-color: #19eddc; font-family: system-ui; float: right; color: whitesmoke; border-radius: 25px; border-color: transparent;">
+               Logout
+               </button>
+               <button onclick="window.location.replace('/account');" style=" background-color: #ed1919b8; font-family: system-ui; float: right; color: whitesmoke; border-radius: 25px; margin-right: 10px; border-color: transparent;">
+               Account
+               </button>
+            </p>
+         </center>
+      </nav>
+      <div class="container">
+         <div id="game">
+         </div>
+         <div class="code-container">
+            <div class="column-center" id="code-editor">
+               <a style="color: fff;">
+                  <p style="margin-top: 1px;font-size: smaller;">
+                     <b style="font-size: medium;">Instructions:</b>
+                     Use the code editor below to tell the ghosts how to move.
+                  </p>
+               </a>
             </div>
-		</div>
-			
-			
-		</div>
-
-		<p><br></p>
-
-		<div id="help" style="display: none;">
-				<b style="margin-left: 45%;"> Commands:</b>
-				<pre> 
-
-<b>PacMan teaching procedure</b>
-
-	1. Play a normal round
-	1. Hard code the ghosts to move in certain directions
-	1. Have students code an if-statement to control ghost
-	1. If statement based on where pac-man is
-	1. While loop with if-statement inside
-	1. Make sure ghost does not get stuck
-	1. Maybe let them see the actual code for the normal game, quick blurb about AI idk
-	1. Play with friends
-
-<b>Step 2 sample code:</b>
-
-	move(right, 3)
-
-	move(down, 2)
-
-	etc.
-
-<b>Step 3 sample code:</b>
-
-	if(ghost can move right)
-
-	move right
-
-	else if(ghost can move left)
-
-	move left
-
-	etc
-
-<b>Step 4:</b>
-
-	If (pac man to the right and can move right)
-
-	move right
-
-	Else if (pac man to the left and can move left)
-
-	Move left
-
-	Etc
-
-
-<b>Step 5:</b>
-
-	While (not at end of game)
-
-	If (pac man to the right and can move right)
-
-	move right
-
-	Else if (pac man to the left and can move left)
-
-	Move left
-
-	etc with up and down
-
-
-				</pre>
-				<button style='background-color: #c6c6c6; width: 60%; margin-left: 20%;' onclick="back()"> Back </button>
-			
-			<p></p>
-		</div>
-
-		<p><br></p>
-		
-		<audio controls loop style='display:none;' id="myAudio">
+            <div class="column-right">
+               <div style="border: solid #fff;">
+                  <br>
+                  <p style="font-weight: bold;margin-bottom: 20px;">Commands</p>
+                  <p></p>
+                  <p style="font-size: small;">
+                     • move('ghost' , 'direction')
+                  </p>
+                  <p style="font-size: small;">
+                     • if true move else stop
+                  </p>
+                  <p style="font-size: small;"> • set direction = 'left'
+                  </p>
+                  <p style="font-size: small;">
+                     • move('ghost' , 'direction')
+                  </p>
+                  <p>
+                     <br>
+                  </p>
+               </div>
+               <br><br>
+               <p style="font-weight: bold;">
+                  Update Speed:
+               </p>
+               <select style="text-align: center;height: 35px;border-radius: 25px;width: 100%;" id="loopSpeed">
+                  <option value="50">Slow</option>
+                  <option value="25">Medium</option>
+                  <option value="10">Fast</option>
+                  <option value="1">Instant</option>
+               </select>
+               <p> 
+               </p>
+               <button style="background-color: #181818;width: 100%;font-family: system-ui;color: whitesmoke;height: 30px;border-radius: 35px;border-color: transparent;" onclick="turnOn('help')" type="button" class="btn btn-primary">Instructions</button>
+               <p>
+               </p>
+               <button style="background-color: #e4a21c;width: 100%;font-family: system-ui;color: whitesmoke;height: 30px;border-radius: 35px;border-color: transparent;" onclick="turnOn('lead')" type="button" class="btn btn-primary">Leaderboard</button>
+               <p>
+               </p>
+               <button style="background-color: #00a94d;width: 100%;height: 30px;font-family: system-ui;color: whitesmoke;border-radius: 25px;border-color: transparent;" onclick="saveCode();" id="submit" type="button" class="btn btn-success">Submit</button>
+               <p>
+               </p>
+               <button style="background-color: #aa1b1b;width: 100%;height: 30px;border-radius: 25px;font-family: system-ui;border-color: transparent;color: white;" id="start-over" type="button" class="btn btn-primary">Restart</button>
+               <p>
+                  <br>
+                  <br>
+                  <br>
+               </p>
+            </div>
+         </div>
+      </div>
+      <div id="help" style="display: none;color: whitesmoke;overflow-y: auto;display: none;justify-content: center;width: 70%;height: 85%;background-color: #8577ff6e;position: absolute;inset: 0px;margin: auto;">
+         <div style="margin: 10px 25px;">
+            <b style="margin-left: 45%;font-family: system-ui;margin-right: 18%;"> Commands:</b>
+            <button style="background-color: #bdb9b9;width: 25%;font-family: system-ui;color: whitesmoke;height: 30px;border-radius: 35px;border-color: transparent;" onclick="turnOff('help')" type="button" class="btn btn-primary">Back</button>
+            <pre style="font-family: revert;"> 
+	 <b>PacMan teaching procedure</b>
+	 
+		 • Play a normal round
+		 • Hard code the ghosts to move in certain directions
+		 • Have students code an if-statement to control ghost
+		 • If statement based on where pac-man is
+		 • While loop with if-statement inside
+		 • Make sure ghost does not get stuck
+		 • Maybe let them see the actual code for the normal game, quick blurb about AI idk
+		 • Play with friends
+	 
+	 <b>Step 2 sample code:</b>
+	 
+		 move(right, 3)
+	 
+		 move(down, 2)
+	 
+		 etc.
+	 
+	 <b>Step 3 sample code:</b>
+	 
+		 if(ghost can move right)
+	 
+		   move('all', 'right')
+	 
+		 else if(ghost can move left)
+	 
+		   move('all, 'left')
+	 
+		 etc
+	 
+	 <b>Step 4:</b>
+	 
+		 If (pac man to the right and can move right)
+	 
+		   move right
+	 
+		 Else if (pac man to the left and can move left)
+	 
+		   Move left
+	 
+		 Etc
+	 
+	 
+	 <b>Step 5:</b>
+	 
+		 While (not at end of game)
+	 
+		 If (pac man to the right and can move right)
+	 
+		 move right
+	 
+		 Else if (pac man to the left and can move left)
+	 
+		 Move left
+	 
+		 etc with up and down
+			</pre>
+         </div>
+      </div>
+      <div id="lead" style="display: none;color: whitesmoke;overflow-y: auto;display: none;justify-content: center;width: 70%;height: 85%;background-color: rgb(174 167 236 / 43%);position: absolute;inset: 0px;margin: auto;">
+         <div style="margin: 10px 25px;">
+            <b style="margin-left: 45%;font-family: system-ui;margin-right: 18%;"> Commands:</b>
+            <button style="background-color: #bdb9b9;width: 25%;font-family: system-ui;color: whitesmoke;height: 30px;border-radius: 35px;border-color: transparent;" onclick="turnOff('lead')" type="button" class="btn btn-primary">Back</button>
+            <table style="width: 100%; margin-top: 15px; height: 70%;">
+              <tr style="height:100%; display:flex">
+               <td style="width: 50%;">
+                  <center> <b style="font-family: sans-serif;color: whitesmoke;">Pacman Leaderboard</b> </center>
+                  <ol id="pac-lead">
+                  </ol>
+               </td>
+               <td style="width: 50%;">
+                  <center> <b style="font-family: sans-serif;color: whitesmoke;">Ghost Leaderboard</b> </center>
+                  <ol id="ghost-lead">
+                  </ol>
+               </td>
+            </tr>
+            </table>
+         </div>
+      </div>
+	  <!-- 
+		<audio controls="" loop="" style="display:none;" id="myAudio">
 			<source muted="muted" src="music.mp3" type="audio/mpeg">
-		  </audio>
-
-		<script>
-			function help() {
-				document.getElementsByClassName('container')[0].style = 'display: none;'
-				document.getElementById('help').style = `	
-						color: whitesmoke;				
-						overflow-y:auto;
-						justify-content: center;
-						width: 70%;
-						height: 85%;
-						background-color: #716565;
-						position: absolute;
-						top:0;
-						bottom: 0;
-						left: 0;
-						right: 0;
-						margin: auto;
-					`
-			}
-			
-			function back() {
-				document.getElementsByClassName('container')[0].style = ''
-				document.getElementById('help').style = 'display: none;'
-			}
-			// function music(onf) {
-			// 	document.getElementById("myAudio").play(); 
-			// }
-		</script>
-
-<!-- Multiplayer screen-->
-
-<div class="multiplayer-menu container-fluid">
-	<h1 style=" color: white;">Multiplayer Menu</h1>
-	<div>
-		
-		<input type="text" class="" placeholder="game code..." id = "game-code">
-		<button type="text" id = "load">Load</button>
-	</div>
-	<div>
-		
-		or <button id = "publish">Publish</button>
-	</div>
-
-
-  </div>
- 
-
-	</body>
-
-	<!-- Pyscript and Bootstrap libraries embedded below, pls don't touch them :)-->
-
-	<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-
+		</audio> 
+	  < -->
+      <script src="src/assets/js/script.js"></script>
+   </body>
 </html>
